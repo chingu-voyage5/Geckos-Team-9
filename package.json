@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^6.5.1",
+    "ajv-keywords": "^3.2.0",
+    "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-fullpage": "^0.1.18",
     "react-scripts": "1.1.4",
     "reactstrap": "^6.1.0"
   },
