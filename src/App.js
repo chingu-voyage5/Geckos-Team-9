@@ -5,7 +5,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      backgroundURL: fetch("https://api.unsplash.com/photos/random", {
+      backgroundURL: ''
+    };
+  }
+  componentDidMount() {
+    fetch("https://api.unsplash.com/photos/random", {
         headers: {
           Authorization:
             "Client-ID d870e34414bd653b93aba9430261a7535a80cedede08dca342de5b0424cb6f46"
@@ -15,9 +19,6 @@ class App extends Component {
         .then(json => {
           this.setState({ backgroundURL: json.urls.regular });
         })
-    };
-  }
-  componentDidMount() {
     document.body.style.background = this.state.backgroundURL;
   }
   render() {
