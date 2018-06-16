@@ -5,24 +5,23 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      backgroundURL: ''
+      backgroundURL: ""
     };
   }
   componentDidMount() {
     fetch("https://api.unsplash.com/photos/random", {
-        headers: {
-          Authorization:
-            "Client-ID d870e34414bd653b93aba9430261a7535a80cedede08dca342de5b0424cb6f46"
-        }
-      })
-        .then(result => result.json())
-        .then(json => {
-          this.setState({ backgroundURL: json.urls.regular });
-        })
-    document.body.style.background = this.state.backgroundURL;
+      headers: {
+        Authorization:
+          "Client-ID d870e34414bd653b93aba9430261a7535a80cedede08dca342de5b0424cb6f46"
+      }
+    })
+      .then(result => result.json())
+      .then(json => {
+        this.setState({ backgroundURL: json.urls.regular });
+      });
   }
   render() {
-    console.log("from render", document.body.background);
+    console.log("from render", this.state.backgroundURL);
     document.querySelector("body").background = this.state.backgroundURL;
     return (
       <div className="App">
