@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Quotes from "./Components/Quotes/QuotesComponent"
 import "./App.css";
-import "../node_modules/slick-carousel/slick/slick.css";
-import "../node_modules/slick-carousel/slick/slick-theme.css";
+import "../node_modules/animate.css/animate.css"
 
 class App extends Component {
   render() {
     return (
+      
       // <div className="App">
       <Quotes></Quotes>
         // {/* <header className="App-header">

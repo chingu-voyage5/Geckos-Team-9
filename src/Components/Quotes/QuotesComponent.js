@@ -1,4 +1,5 @@
 import React from "react";
+import { Animated } from "react-animated-css";
 // import { getQuote } from "./QuotesApi";
 
 class Quotes extends React.Component {
@@ -178,8 +179,13 @@ class Quotes extends React.Component {
     }
   }
 
-  render() {
+  renderQuoteAnimate(){
     let quotes = this.state.quotes[this.state.quoteIndex];
+      return <Animated animationIn="lightSpeedIn" animationOut="zoomOutDown" isVisible={true}>{quotes.quote}</Animated>;
+  }
+
+  render() {
+  
     return (
       //   <div className="fullpage">
       //     {this.state.quotes.map(quotes => (
@@ -198,7 +204,7 @@ class Quotes extends React.Component {
             <button onClick={this.onPreviousQuote.bind(this)}>Previuos</button>
           </div>
           <div className="p-2">
-          {quotes.quote}
+           {this.renderQuoteAnimate()}
           </div>
           <div className="p-2">
             <button onClick={this.onNextQuote.bind(this)}>Next</button>
