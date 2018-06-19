@@ -1,5 +1,6 @@
 import React from "react";
 import { Animated } from "react-animated-css";
+import { Button, Fade } from "reactstrap";
 // import { getQuote } from "./QuotesApi";
 
 class Quotes extends React.Component {
@@ -137,11 +138,31 @@ class Quotes extends React.Component {
           image: null
         }
       ],
-      quoteIndex: 0
+      quoteIndex: 0,
+      fadeIn: false
     };
 
     // this.nextQuote = this.nextQuote.bind(this);
     // this.previousQuote = this.previousQuote.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("Component Will receive proprs", nextProps);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("Should update", nextProps, nextState);
+    if (nextState.fadeIn === false) {
+      this.toggleAnimation();
+      return true;
+      console.log("FadeIn true");
+    }else{
+        return true;
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log("Component Will Update", nextProps, nextProps);
   }
 
   componentDidMount() {
@@ -156,6 +177,8 @@ class Quotes extends React.Component {
   onNextQuote() {
     const index = this.state.quoteIndex;
     const quoteSize = this.state.quotes.length - 1;
+    console.log("nextQuote"); 
+    this.toggleAnimation();
     if (index < quoteSize) {
       this.setState({
         quoteIndex: index + 1
@@ -170,22 +193,39 @@ class Quotes extends React.Component {
   onPreviousQuote() {
     const index = this.state.quoteIndex;
     const quoteSize = this.state.quotes.length - 1;
-
     if (index < quoteSize && index > 0) {
       console.log(this.state.quoteIndex);
       this.setState({
-        quoteIndex: this.state.quoteIndex - 1
+        quoteIndex: this.state.quoteIndex - 1,
+        fadeIn: true
       });
     }
   }
 
-  renderQuoteAnimate(){
+  renderQuoteAnimate() {
     let quotes = this.state.quotes[this.state.quoteIndex];
-      return <Animated animationIn="lightSpeedIn" animationOut="zoomOutDown" isVisible={true}>{quotes.quote}</Animated>;
+    return (
+      <Fade in={this.state.fadeIn} tag="h5" className="mt-3">
+        <p>{quotes.quote}</p>
+      </Fade>
+
+      //   <Animated
+      //     animationIn="fadeIn"
+      //     animationOut="fadeOut"
+      //     isVisible={true}
+      //   >
+      //     <p>{quotes.quote}</p>
+      //   </Animated>
+    );
+  }
+
+  toggleAnimation() {
+    this.setState({
+      fadeIn: !this.state.fadeIn
+    });
   }
 
   render() {
-  
     return (
       //   <div className="fullpage">
       //     {this.state.quotes.map(quotes => (
@@ -201,13 +241,23 @@ class Quotes extends React.Component {
           style={{ height: window.innerHeight }}
         >
           <div className="p-2">
-            <button onClick={this.onPreviousQuote.bind(this)}>Previuos</button>
+            <Button
+              outline
+              color="primary"
+              onClick={this.onPreviousQuote.bind(this)}
+            >
+              Previuos
+            </Button>
           </div>
+          <div className="p-5">{this.renderQuoteAnimate()}</div>
           <div className="p-2">
-           {this.renderQuoteAnimate()}
-          </div>
-          <div className="p-2">
-            <button onClick={this.onNextQuote.bind(this)}>Next</button>
+            <Button
+              outline
+              color="primary"
+              onClick={this.onNextQuote.bind(this)}
+            >
+              Next
+            </Button>
           </div>
         </div>
       </div>
