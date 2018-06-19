@@ -45,20 +45,25 @@ class Search extends Component {
     super();
     this.state = {
       search: '',
-      quotes: quotes
+      quotes: quotes,
+      paragraph: ''
     };
     this.updateSearch = this.updateSearch.bind(this)
     this.displayQuote = this.displayQuote.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    console.log(this);
   }
+
+
 
   displayQuote(quotes){
 
-    return this.state.quotes.map((currentQuote) =>
+    return quotes.map((currentQuote) =>
 
          currentQuote.quote.includes(this.state.search) || currentQuote.author.includes(this.state.search) || currentQuote.tags.includes(this.state.search)
          ?
-         currentQuote.quote + currentQuote.author
+
+         this.state.paragraph = currentQuote.quote + currentQuote.author
          :
          console.log('Sorry, try again')
 
@@ -66,18 +71,24 @@ class Search extends Component {
      }
 
   updateSearch(event) {
-    this.setState({search: event.target.value})
+    this.setState({
+      search: event.target.value
+    })
   }
 
   handleClick (e){
     e.preventDefault();
     this.state.search !== ""
     ?
-    this.displayQuote()
+    this.setState({
+      paragraph: this.displayQuote(quotes)
+    })
     :
     null
 
   }
+
+
 
   render(
 
@@ -93,16 +104,21 @@ class Search extends Component {
   return(
     <div>
 
-      <input
-       type='text'
-       placeholder='Insert a keyword'
-       value={this.state.search}
-       onChange={this.updateSearch}
-      />
-      <button
-        onClick={this.handleClick}>
-        Search
-      </button>
+    <input
+     type='text'
+     placeholder='Insert a keyword'
+     value={this.state.search}
+     onChange={this.updateSearch}
+    />
+    <button
+      onClick={this.handleClick}>
+      Search
+    </button>
+
+    <br/>
+
+    {this.state.paragraph}
+
     </div>
 
   )}
