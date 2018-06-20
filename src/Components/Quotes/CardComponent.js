@@ -13,27 +13,35 @@ import {
 } from "reactstrap";
 
 function CardComponent(props) {
+
+    const styleCard = {
+        maxHeight: "190px",
+        overflow: "auto"
+    }
   return (
+    //   <div className="fullpage">
+    //     {this.state.quotes.map(quotes => (
+    //       <div className="section" key={quotes.pk}>
+    //         {quotes.quote}
+    //       </div>
+    //     ))}
+    //   </div>
     <Row>
-      <Col sm="3">
-        <Card>
-          <CardImg
-            top
-            width="100%"
-            src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
-            alt="Card image cap"
-          />
-          <CardBody>
-            <CardTitle>Card title</CardTitle>
-            <CardSubtitle>Card subtitle</CardSubtitle>
-            <CardText>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </CardText>
-            <Button>Button</Button>
-          </CardBody>
-        </Card>
-      </Col>
+      {props.quote.map(q => (
+        <Col sm="3" key={q.pk}>
+          <Card inverse >
+            <CardImg
+              width="100%"
+              src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97270&w=318&h=270&bg=333333&txtclr=666666"
+              alt="Card image cap"
+            />
+            <CardImgOverlay>
+              <CardText >"{q.quote}"</CardText>
+              <CardText><small className="text-muted">{q.author}</small></CardText>
+            </CardImgOverlay>
+          </Card>
+        </Col>
+      ))}
     </Row>
   );
 }

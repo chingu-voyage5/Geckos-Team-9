@@ -1,6 +1,6 @@
 import React from "react";
 import { Animated } from "react-animated-css";
-import { CardDeck, Button, Fade } from "reactstrap";
+import { CardDeck, Button, Fade, Row } from "reactstrap";
 import CardComponent from "./CardComponent";
 
 // import { getQuote } from "./QuotesApi";
@@ -188,7 +188,7 @@ class Quotes extends React.Component {
     let quotes = this.state.quotes[this.state.quoteIndex];
     return (
       <Fade in={this.state.fadeIn} tag="h5" className="mt-3">
-        <p>{quotes.quote}</p>
+        <p>"{quotes.quote}"</p>
       </Fade>
 
       //   <Animated
@@ -208,63 +208,55 @@ class Quotes extends React.Component {
   }
 
   render() {
-    let visibleContainer;
-    if (this.state.fadeIn) {
-    visibleContainer = <div>
+    const fadeIn = this.state.fadeIn;
+    const quotes = this.state.quotes;
+    return (
+      <div>
         <div className="d-flex justify-content-center p-3">
           <Button
             outline
             color="primary"
-            onClick={this.toggleAnimation.bind(this)}
-          >
+            onClick={this.toggleAnimation.bind(this)}>
             Toggle
           </Button>
         </div>
-        <Fade in={this.state.fadeIn}>
-          <div
-            className="d-flex justify-content-between align-items-center"
-            style={{ height: window.innerHeight }}
-          >
-            <div className="p-2">
-              <Button
-                outline
-                color="primary"
-                onClick={this.onPreviousQuote.bind(this)}
-              >
-                Previuos
-              </Button>
+        {fadeIn ? (
+          <Fade in={fadeIn}>
+            <div
+              className="d-flex justify-content-between align-items-center"
+              style={{ height: window.innerHeight }}
+            >
+              <div className="p-2">
+                <Button
+                  outline
+                  color="primary"
+                  onClick={this.onPreviousQuote.bind(this)}
+                >
+                  Previuos
+                </Button>
+              </div>
+              <div className="p-5">
+                {this.renderQuoteAnimate()} <br />
+              </div>
+              <div className="p-2">
+                <Button
+                  outline
+                  color="primary"
+                  onClick={this.onNextQuote.bind(this)}
+                >
+                  Next
+                </Button>
+              </div>
             </div>
-            <div className="p-5">
-              {this.renderQuoteAnimate()} <br />
+          </Fade>
+        ) : (
+          <Fade in={!fadeIn}>
+            <div  className="p-3"  style={{ height: window.innerHeight }}>
+                <CardComponent quote={quotes}/>
             </div>
-            <div className="p-2">
-              <Button
-                outline
-                color="primary"
-                onClick={this.onNextQuote.bind(this)}
-              >
-                Next
-              </Button>
-            </div>
-          </div>
-        </Fade>
+          </Fade>
+        )}
       </div>
-    } else {
-      visibleContainer = <div>
-        <Fade in={!this.state.fadeIn} className="p-3">
-          <CardComponent name="Rodiel" text="wewefwef" time="Right Now" />
-        </Fade>
-      </div>
-    }
-    return (
-      //   <div className="fullpage">
-      //     {this.state.quotes.map(quotes => (
-      //       <div className="section" key={quotes.pk}>
-      //         {quotes.quote}
-      //       </div>
-      //     ))}
-      //   </div>
-      {visibleContainer}
     );
   }
 }
