@@ -2,12 +2,8 @@ import React from "react";
 import {
   Card,
   CardImg,
-  CardImgOverlay,
-  CardSubtitle,
-  CardBody,
-  CardTitle,
+  CardImgOverlay, 
   CardText,
-  Button,
   Row,
   Col
 } from "reactstrap";
@@ -18,14 +14,9 @@ function CardComponent(props) {
         maxHeight: "190px",
         overflow: "auto"
     }
+    
   return (
-    //   <div className="fullpage">
-    //     {this.state.quotes.map(quotes => (
-    //       <div className="section" key={quotes.pk}>
-    //         {quotes.quote}
-    //       </div>
-    //     ))}
-    //   </div>
+   
     <Row>
       {props.quote.map(q => (
         <Col sm="3" key={q.pk}>
