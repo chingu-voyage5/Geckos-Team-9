@@ -1,21 +1,37 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import { Button } from "reactstrap";
-import { Alert } from "reactstrap";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      backgroundURL: ""
+    };
+  }
+  componentDidMount() {
+    fetch("https://api.unsplash.com/photos/random", {
+      headers: {
+        Authorization:
+          "Client-ID d870e34414bd653b93aba9430261a7535a80cedede08dca342de5b0424cb6f46"
+      }
+    })
+      .then(result => result.json())
+      .then(json => {
+        this.setState({ backgroundURL: json.urls.regular });
+      });
+  }
   render() {
+    console.log("from render", this.state.backgroundURL);
+    document.querySelector("body").background = this.state.backgroundURL;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to our awesome project!</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Alert color="primary">The application has boostrap installed.. Woola!! </Alert>
+        <h1>search bar component will replace this h1</h1>
+        <h1>quote cards or slider component will replace this h1</h1>
+        <h2>
+          it might contain the picker for cards/slider or maybe that is it's own
+          component?
+        </h2>
+        <h1>social component will replace this h1</h1>
       </div>
     );
   }
