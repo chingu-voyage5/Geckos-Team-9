@@ -141,9 +141,10 @@ class Quotes extends React.Component {
         }
       ],
       quoteIndex: 0,
-      fadeIn: true
+      fadeIn: true,
+      animated: false
     };
-
+    this.animationTime();
     // this.nextQuote = this.nextQuote.bind(this);
     // this.previousQuote = this.previousQuote.bind(this);
   }
@@ -163,13 +164,16 @@ class Quotes extends React.Component {
     console.log("nextQuote");
     if (index < quoteSize) {
       this.setState({
-        quoteIndex: index + 1
+        quoteIndex: index + 1,
+        animated: false
       });
     } else {
       this.setState({
-        quoteIndex: 0
+        quoteIndex: 0,
+        animated: false
       });
     }
+    this.animationTime();
   }
 
   onPreviousQuote() {
@@ -179,25 +183,36 @@ class Quotes extends React.Component {
       console.log(this.state.quoteIndex);
       this.setState({
         quoteIndex: this.state.quoteIndex - 1,
-        fadeIn: true
+        animated:false
       });
     }
+    this.animationTime();
+  }
+
+  animationTime() {
+    setTimeout(() => {
+      this.setState({ animated: true});
+    }, 50);
   }
 
   renderQuoteAnimate() {
     let quotes = this.state.quotes[this.state.quoteIndex];
+    const style = {
+      display: this.state.animated ? "" : "none"
+    };
     return (
-      <Fade in={this.state.fadeIn} tag="h5" className="mt-3">
-        <p>"{quotes.quote}"</p>
-      </Fade>
+      // <Fade in={this.state.fadeIn} tag="h5" className="mt-3">
+      //   <p>"{quotes.quote}"</p>
+      // </Fade>
 
-      //   <Animated
-      //     animationIn="fadeIn"
-      //     animationOut="fadeOut"
-      //     isVisible={true}
-      //   >
-      //     <p>{quotes.quote}</p>
-      //   </Animated>
+      <Animated
+        animationIn="fadeIn"
+        animationOut="fadeOut"
+        isVisible={true}
+        style={style}
+      >
+        <h5>{quotes.quote}</h5>
+      </Animated>
     );
   }
 
@@ -206,6 +221,8 @@ class Quotes extends React.Component {
       fadeIn: !this.state.fadeIn
     });
   }
+
+  isAnimated() {}
 
   render() {
     const fadeIn = this.state.fadeIn;
@@ -216,12 +233,13 @@ class Quotes extends React.Component {
           <Button
             outline
             color="primary"
-            onClick={this.toggleAnimation.bind(this)}>
-            Toggle
+            onClick={this.toggleAnimation.bind(this)}
+          >
+            {fadeIn ? "Show All" : "Slide"}
           </Button>
         </div>
         {fadeIn ? (
-          <Fade in={fadeIn}>
+          <div style={{ display: fadeIn ? "block" : "none" }}>
             <div
               className="d-flex justify-content-between align-items-center"
               style={{ height: window.innerHeight }}
@@ -248,13 +266,19 @@ class Quotes extends React.Component {
                 </Button>
               </div>
             </div>
-          </Fade>
+          </div>
         ) : (
-          <Fade in={!fadeIn}>
-            <div  className="p-3"  style={{ height: window.innerHeight }}>
-                <CardComponent quote={quotes}/>
-            </div>
-          </Fade>
+          <div style={{ display: fadeIn ? "none" : "block" }}>
+            <Animated
+              animationIn="fadeIn"
+              animationOut="fadeOut"
+              isVisible={true}
+            >
+              <div className="p-3" style={{ height: window.innerHeight }}>
+                <CardComponent quote={quotes} />
+              </div>
+            </Animated>
+          </div>
         )}
       </div>
     );
