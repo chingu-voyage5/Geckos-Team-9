@@ -1,7 +1,8 @@
 import React from "react";
 import { Animated } from "react-animated-css";
-import { CardDeck, Button, Fade, Row } from "reactstrap";
+import { Button } from "reactstrap";
 import CardComponent from "./CardComponent";
+import "./Quote.css";
 
 // import { getQuote } from "./QuotesApi";
 
@@ -183,7 +184,7 @@ class Quotes extends React.Component {
       console.log(this.state.quoteIndex);
       this.setState({
         quoteIndex: this.state.quoteIndex - 1,
-        animated:false
+        animated: false
       });
     }
     this.animationTime();
@@ -191,7 +192,7 @@ class Quotes extends React.Component {
 
   animationTime() {
     setTimeout(() => {
-      this.setState({ animated: true});
+      this.setState({ animated: true });
     }, 50);
   }
 
@@ -211,7 +212,7 @@ class Quotes extends React.Component {
         isVisible={true}
         style={style}
       >
-        <h5>{quotes.quote}</h5>
+        <span>{quotes.quote}</span>
       </Animated>
     );
   }
@@ -222,59 +223,43 @@ class Quotes extends React.Component {
     });
   }
 
-  isAnimated() {}
-
   render() {
     const fadeIn = this.state.fadeIn;
     const quotes = this.state.quotes;
     return (
-      <div>
+      <div className=  {fadeIn ? "wrap": "container"}>
         <div className="d-flex justify-content-center p-3">
           <Button
             outline
             color="primary"
-            onClick={this.toggleAnimation.bind(this)}
-          >
+            onClick={this.toggleAnimation.bind(this)}>
             {fadeIn ? "Show All" : "Slide"}
           </Button>
         </div>
+
         {fadeIn ? (
-          <div style={{ display: fadeIn ? "block" : "none" }}>
-            <div
-              className="d-flex justify-content-between align-items-center"
-              style={{ height: window.innerHeight }}
-            >
-              <div className="p-2">
-                <Button
-                  outline
-                  color="primary"
-                  onClick={this.onPreviousQuote.bind(this)}
-                >
-                  Previuos
-                </Button>
-              </div>
-              <div className="p-5">
-                {this.renderQuoteAnimate()} <br />
-              </div>
-              <div className="p-2">
-                <Button
-                  outline
-                  color="primary"
-                  onClick={this.onNextQuote.bind(this)}
-                >
-                  Next
-                </Button>
+            <div style={{ display: fadeIn ? "block" : "none" }}>
+              <div className="d-flex justify-content-between align-items-center">
+                <div className="p-2">
+                  <i className="arrow left" onClick={this.onPreviousQuote.bind(this)}></i>
+                </div>
+
+                <div className="slide-content p-5">
+                  {this.renderQuoteAnimate()} <br />
+                </div>
+
+                <div className="p-2">
+                    <i className="arrow right"  onClick={this.onNextQuote.bind(this)}></i>
+                </div>
               </div>
             </div>
-          </div>
         ) : (
           <div style={{ display: fadeIn ? "none" : "block" }}>
             <Animated
               animationIn="fadeIn"
               animationOut="fadeOut"
-              isVisible={true}
-            >
-              <div className="p-3" style={{ height: window.innerHeight }}>
+              isVisible={true}>
+              <div>
                 <CardComponent quote={quotes} />
               </div>
             </Animated>

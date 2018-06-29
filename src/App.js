@@ -6,7 +6,7 @@ import "../node_modules/animate.css/animate.css";
 class App extends Component {
   render() {
     return (
-      <div>
+      <div> 
         <Quotes />
       </div>
     );
