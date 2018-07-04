@@ -10,6 +10,7 @@ class App extends Component {
       backgroundURL: ""
     };
   }
+  
   componentDidMount() {
     fetch("https://api.unsplash.com/photos/random", {
       headers: {
@@ -23,18 +24,18 @@ class App extends Component {
       });
   }
   render() {
-    console.log("from render", this.state.backgroundURL);
     document.querySelector("body").background = this.state.backgroundURL;
     return (
-      <div className="App">
+      <div className="wrap">
+        <div className="container">
+          <h1 style={{ color: "white" }}>
+            search bar component will replace this h1
+          </h1>
+        </div>
         <Quotes />
-        <h1>search bar component will replace this h1</h1>
-        <h1>quote cards or slider component will replace this h1</h1>
-        <h2>
-          it might contain the picker for cards/slider or maybe that is it's own
-          component?
-        </h2>
-        <h1>social component will replace this h1</h1>
+        <h1 style={{ color: "white" }}>
+          social component will replace this h1
+        </h1>
       </div>
     );
   }

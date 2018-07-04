@@ -45,7 +45,8 @@ class Quotes extends React.Component {
             "bodyguard"
           ],
           pk: 60595,
-          image: "https://images.unsplash.com/photo-1476304884326-cd2c88572c5f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a68d52674735e061380321383859eb17&auto=format&fit=crop&w=1500&q=80"
+          image:
+            "https://images.unsplash.com/photo-1476304884326-cd2c88572c5f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a68d52674735e061380321383859eb17&auto=format&fit=crop&w=1500&q=80"
         },
         {
           quote:
@@ -213,7 +214,7 @@ class Quotes extends React.Component {
         isVisible={true}
         style={style}
       >
-        <span>{quotes.quote}</span>
+        <span className="quotation">{quotes.quote}</span>
       </Animated>
     );
   }
@@ -229,11 +230,11 @@ class Quotes extends React.Component {
     const quotes = this.state.quotes;
     let image = quotes[this.state.quoteIndex].image;
     let styleBack = {
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundImage:`url(${image})`
-    }
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      backgroundImage: `url(${image})`
+    };
     return (
       <div className={fadeIn ? "wrap" : "container"}>
         <div className="d-flex justify-content-center p-3">
@@ -256,10 +257,10 @@ class Quotes extends React.Component {
                 />
               </div>
 
-                <div className="slide-content p-5">
-                  {this.renderQuoteAnimate()} <br />
-                </div>
-              
+              <div className="slide-content p-5">
+                {this.renderQuoteAnimate()} <br />
+              </div>
+
               <div className="p-2">
                 <i
                   className="arrow right"
