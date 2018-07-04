@@ -26,7 +26,8 @@ class Quotes extends React.Component {
             "muses"
           ],
           pk: 60596,
-          image: null
+          image:
+            "https://images.unsplash.com/photo-1484910292437-025e5d13ce87?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b26342fc7cb1addb776c8c86a202afa1&auto=format&fit=crop&w=1388&q=80"
         },
         {
           quote:
@@ -44,7 +45,7 @@ class Quotes extends React.Component {
             "bodyguard"
           ],
           pk: 60595,
-          image: null
+          image: "https://images.unsplash.com/photo-1476304884326-cd2c88572c5f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a68d52674735e061380321383859eb17&auto=format&fit=crop&w=1500&q=80"
         },
         {
           quote:
@@ -226,39 +227,54 @@ class Quotes extends React.Component {
   render() {
     const fadeIn = this.state.fadeIn;
     const quotes = this.state.quotes;
+    let image = quotes[this.state.quoteIndex].image;
+    let styleBack = {
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundImage:`url(${image})`
+    }
     return (
-      <div className=  {fadeIn ? "wrap": "container"}>
+      <div className={fadeIn ? "wrap" : "container"}>
         <div className="d-flex justify-content-center p-3">
           <Button
             outline
             color="primary"
-            onClick={this.toggleAnimation.bind(this)}>
+            onClick={this.toggleAnimation.bind(this)}
+          >
             {fadeIn ? "Show All" : "Slide"}
           </Button>
         </div>
 
         {fadeIn ? (
-            <div style={{ display: fadeIn ? "block" : "none" }}>
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="p-2">
-                  <i className="arrow left" onClick={this.onPreviousQuote.bind(this)}></i>
-                </div>
+          <div style={{ display: fadeIn ? "block" : "none" }}>
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="p-2">
+                <i
+                  className="arrow left"
+                  onClick={this.onPreviousQuote.bind(this)}
+                />
+              </div>
 
                 <div className="slide-content p-5">
                   {this.renderQuoteAnimate()} <br />
                 </div>
-
-                <div className="p-2">
-                    <i className="arrow right"  onClick={this.onNextQuote.bind(this)}></i>
-                </div>
+              
+              <div className="p-2">
+                <i
+                  className="arrow right"
+                  onClick={this.onNextQuote.bind(this)}
+                />
               </div>
             </div>
+          </div>
         ) : (
           <div style={{ display: fadeIn ? "none" : "block" }}>
             <Animated
               animationIn="fadeIn"
               animationOut="fadeOut"
-              isVisible={true}>
+              isVisible={true}
+            >
               <div>
                 <CardComponent quote={quotes} />
               </div>
