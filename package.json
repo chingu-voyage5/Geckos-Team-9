@@ -2,6 +2,7 @@
   "name": "geckos-team-9",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://bushbass.github.io/Geckos-Team-9",
   "dependencies": {
     "ajv": "^6.5.1",
     "ajv-keywords": "^3.2.0",
