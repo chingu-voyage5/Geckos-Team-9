@@ -4,18 +4,18 @@ import React, { Component } from 'react';
 //it to the parent component
 
 //search stores the
-  // search term in App.js like
-  // this.state.searchTerm
+// search term in App.js like
+// this.state.searchTerm
 
 // when the user clicks
- // the search
- // button, it sets state.searchTerm
+// the search
+// button, it sets state.searchTerm
 
 // when two (or more) components
 // share the same state, it lives in the
- // parent component and then it gets
-  // passed down to the children.= 'lifting
-  // state up"
+// parent component and then it gets
+// passed down to the children.= 'lifting
+// state up"
 
 class Search extends Component {
 
@@ -24,12 +24,11 @@ class Search extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-
   handleClick (e){
     e.preventDefault();
-    e.target.value !== ''
+    this.props.searchTerm !== ''
     ?
-    this.props.searchThis(this.props.searchTerm)
+    alert('Searching for' +  ' ' + this.props.searchTerm)
     :
     null
   }
@@ -44,12 +43,12 @@ class Search extends Component {
     <input
      type='text'
      placeholder='Insert a keyword'
-    //  value={this.props.searchTerm}
-    //  onChange={}
+     value={this.props.searchTerm}
+     onChange={this.props.searchThis}
     />
     <button
       type='button'
-      onClick={this.handleClick()}>
+      onClick={this.handleClick}>
       Search
     </button>
 
