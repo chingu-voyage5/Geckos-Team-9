@@ -29,7 +29,7 @@ class Search extends Component {
     e.preventDefault();
     e.target.value !== ''
     ?
-    this.props.searchThis(searchTerm)
+    this.props.searchThis(this.props.searchTerm)
     :
     null
   }
@@ -44,7 +44,7 @@ class Search extends Component {
     <input
      type='text'
      placeholder='Insert a keyword'
-     value={this.props.searchTerm}
+    //  value={this.props.searchTerm}
     //  onChange={}
     />
     <button

@@ -25,7 +25,7 @@ class App extends Component {
       <div className="App">
 
         <Search searchTerm={this.state.searchTerm}
-                searchThis={this.searchThis()}
+                searchThis={this.searchThis}
         />
 
       </div>
