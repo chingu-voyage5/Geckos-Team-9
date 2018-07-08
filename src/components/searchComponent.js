@@ -17,12 +17,17 @@ import React, { Component } from 'react';
 // passed down to the children.= 'lifting
 // state up"
 
+//suggestions
 class Search extends Component {
 
   constructor(props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
-  }
+}
+
+
+//When click happens, the APIs will start searching.
+//Not sure if the click event will be here.
 
   handleClick (e){
     e.preventDefault();
@@ -43,7 +48,8 @@ class Search extends Component {
     <input
      type='text'
      placeholder='Insert a keyword'
-     value={this.props.searchTerm}
+    //  value={this.props.searchTerm}
+     ref={this.props.textInput}
      onChange={this.props.searchThis}
     />
     <button

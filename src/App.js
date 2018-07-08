@@ -7,6 +7,7 @@ import Search from './components/searchComponent';
 class App extends Component {
   constructor(props){
     super(props);
+    this.myRef = React.createRef();
     this.state = {
       searchTerm: ''
     }
@@ -26,6 +27,7 @@ class App extends Component {
 
         <Search searchTerm={this.state.searchTerm}
                 searchThis={this.searchThis}
+                textInput={this.myRef}
         />
 
       </div>
