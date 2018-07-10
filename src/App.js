@@ -26,7 +26,7 @@ class App extends Component {
           ],
           pk: 60596,
           image:
-            "https://images.unsplash.com/photo-1484910292437-025e5d13ce87?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b26342fc7cb1addb776c8c86a202afa1&auto=format&fit=crop&w=1388&q=80"
+          "https://source.unsplash.com/category/nature/1920x1080"
         },
         {
           quote:
@@ -45,7 +45,7 @@ class App extends Component {
           ],
           pk: 60595,
           image:
-            "https://images.unsplash.com/photo-1476304884326-cd2c88572c5f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a68d52674735e061380321383859eb17&auto=format&fit=crop&w=1500&q=80"
+          "https://source.unsplash.com/category/sport/1920x1080"
         },
         {
           quote:
@@ -61,7 +61,7 @@ class App extends Component {
             "bodyguard"
           ],
           pk: 60594,
-          image: null
+          image: "https://source.unsplash.com/category/nature/1920x1080"
         },
         {
           quote:
@@ -70,7 +70,7 @@ class App extends Component {
           likes: 0,
           tags: ["romance", "dance", "mythology", "paranormal-romance"],
           pk: 60593,
-          image: null
+          image: "https://source.unsplash.com/category/nature/1920x1080"
         },
         {
           quote:
@@ -79,7 +79,7 @@ class App extends Component {
           likes: 0,
           tags: ["romance", "military", "dance", "mythology", "paranormal"],
           pk: 60592,
-          image: null
+          image: "https://source.unsplash.com/category/nature/1920x1080"
         },
         {
           quote:
@@ -88,7 +88,7 @@ class App extends Component {
           likes: 0,
           tags: ["romance", "military", "dance", "paranormal"],
           pk: 60591,
-          image: null
+          image: "https://source.unsplash.com/category/nature/1920x1080"
         },
         {
           quote:
@@ -97,7 +97,7 @@ class App extends Component {
           likes: 0,
           tags: ["romance", "greek-mythology", "paranormal"],
           pk: 60590,
-          image: null
+          image: "https://source.unsplash.com/category/nature/1920x1080"
         },
         {
           quote:
@@ -106,7 +106,7 @@ class App extends Component {
           likes: 0,
           tags: ["romance", "mythology", "paranormal"],
           pk: 60589,
-          image: null
+          image: "https://source.unsplash.com/category/nature/1920x1080"
         },
         {
           quote:
@@ -122,7 +122,7 @@ class App extends Component {
             "love-story"
           ],
           pk: 60588,
-          image: null
+          image: "https://source.unsplash.com/category/nature/1920x1080"
         },
         {
           quote:
@@ -139,13 +139,13 @@ class App extends Component {
             "love-story"
           ],
           pk: 60587,
-          image: null
+          image: "https://source.unsplash.com/category/nature/1920x1080"
         }
       ],
-      fadeIn: true
+      showAll: true
     };
 
-    this.toggleAnimation = this.toggleAnimation.bind(this);
+    this.onShowList = this.onShowList.bind(this);
   }
 
   componentDidMount() {
@@ -161,10 +161,10 @@ class App extends Component {
     //   });
   }
 
-  toggleAnimation() {
+  onShowList() {
     console.log("Clicked!!!");
     this.setState({
-      fadeIn: !this.state.fadeIn
+      showAll: !this.state.showAll
     });
   }
 
@@ -174,31 +174,17 @@ class App extends Component {
     const backgroundURL =
       "https://source.unsplash.com/category/nature/1920x1080";
     const quotes = this.state.quotes;
-    const fadeIn = this.state.fadeIn;
+    const showAll = this.state.showAll;
     return (
-      <div className={fadeIn ? "wrap" : "container"}>
-        
-        <div className="screen">
-          <img src={backgroundURL} />
-        </div>
-
+      <div className={showAll? "wrap" : ""}>
         <div className="top">
           <h1 style={{ color: "white" }}>
             search bar component will replace this h1
           </h1>
         </div>
 
-        <Quotes
-          quotes={quotes}
-          fadeIn={fadeIn}
-          toggleAnimation={this.toggleAnimation}
-        />
+        <Quotes quotes={quotes} background={backgroundURL} showAll={showAll} onShowList={this.onShowList}/>
 
-        <div className={fadeIn ? "bottom" : "bottomCenter"}>
-          <h1 style={{ color: "white" }}>
-            social component will replace this h1
-          </h1>
-        </div>
       </div>
     );
   }

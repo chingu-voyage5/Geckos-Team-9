@@ -14,6 +14,7 @@ class Quotes extends React.Component {
       animated: false
     };
     this.animationTime();
+
     // this.onNextQuote = this.nextQuote.bind(this);
     // this.onPreviousQuote = this.previousQuote.bind(this);
   }
@@ -85,41 +86,37 @@ class Quotes extends React.Component {
     );
   }
 
-  // toggleAnimation() {
-  //   this.setState({
-  //     fadeIn: !this.state.fadeIn
-  //   });
-  // }
+
 
   render() {
-    const fadeIn = this.props.fadeIn;
+    const showAll = this.props.showAll;
     const quotes = this.props.quotes;
     let image = quotes[this.state.quoteIndex].image;
-    let styleBack = {
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      backgroundImage: `url(${image})`
-    };
+    // let styleBack = {
+    //   backgroundSize: "cover",
+    //   backgroundPosition: "center",
+    //   backgroundRepeat: "no-repeat",
+    //   backgroundImage: `url(${image})`
+    // };
     return (
-      <div className={fadeIn ? "wrap" : "container"}>
+      <div className={showAll ? "wrap" : "container"}>
+
+       <div className="screen">
+       {/* BackgroundComponent */}
+          <img src={image} />
+        </div>
       
         <div className="d-flex justify-content-center p-3">
-          <Button
-            outline
-            color="primary"
-            onClick={this.props.toggleAnimation}
-          >
-            {fadeIn ? "Show All" : "Slide"}
+          <Button onClick={this.props.onShowList} >
+            {showAll ? "Show All" : "Slide"}
           </Button>
         </div>
 
-        {fadeIn ? (
-          <div style={{ display: fadeIn ? "block" : "none" }}>
+        {showAll ? (
+          <div style={{ display: showAll ? "block" : "none" }}>
             <div className="d-flex justify-content-between align-items-center">
               <div className="p-2">
-                <i
-                  className="arrow left"
+                <i className="arrow left"
                   onClick={this.onPreviousQuote.bind(this)}
                 />
               </div>
@@ -135,7 +132,7 @@ class Quotes extends React.Component {
             </div>
           </div>
         ) : (
-          <div style={{ display: fadeIn ? "none" : "block" }}>
+          <div style={{ display: showAll ? "none" : "block" }}>
             <Animated
               animationIn="fadeIn"
               animationOut="fadeOut"
@@ -147,6 +144,12 @@ class Quotes extends React.Component {
             </Animated>
           </div>
         )}
+        <div className={showAll ? "bottom" : "bottomCenter"}>
+        {/* SocialComponent */}
+          <h1 style={{ color: "white" }}>
+            social component will replace this h1
+          </h1>
+        </div>
       </div>
     );
   }
