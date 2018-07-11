@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Quotes from "./Components/Quotes/QuotesComponent";
-import { Animated } from "react-animated-css";
 import "./App.css";
 import "../node_modules/animate.css/animate.css";
 
@@ -25,8 +24,7 @@ class App extends Component {
             "muses"
           ],
           pk: 60596,
-          image:
-          "https://source.unsplash.com/category/nature/1920x1080"
+          image: "https://source.unsplash.com/category/nature/1920x1080"
         },
         {
           quote:
@@ -44,8 +42,7 @@ class App extends Component {
             "bodyguard"
           ],
           pk: 60595,
-          image:
-          "https://source.unsplash.com/category/sport/1920x1080"
+          image: "https://source.unsplash.com/category/sport/1920x1080"
         },
         {
           quote:
@@ -161,6 +158,31 @@ class App extends Component {
     //   });
   }
 
+  loadSocialPlugin() {
+    /*eslint-disable no-undef*/
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: "1907512692601823",
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: "v3.0"
+      });
+    };
+
+    (function(d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+    /*eslint-disable no-undef*/
+  }
+
   onShowList() {
     console.log("Clicked!!!");
     this.setState({
@@ -176,15 +198,19 @@ class App extends Component {
     const quotes = this.state.quotes;
     const showAll = this.state.showAll;
     return (
-      <div className={showAll? "wrap" : ""}>
+      <div className={showAll ? "wrap" : ""}>
         <div className="top">
           <h1 style={{ color: "white" }}>
             search bar component will replace this h1
           </h1>
         </div>
 
-        <Quotes quotes={quotes} background={backgroundURL} showAll={showAll} onShowList={this.onShowList}/>
-
+        <Quotes
+          quotes={quotes}
+          background={backgroundURL}
+          showAll={showAll}
+          onShowList={this.onShowList}
+        />
       </div>
     );
   }

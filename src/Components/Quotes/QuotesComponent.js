@@ -2,6 +2,7 @@ import React from "react";
 import { Animated } from "react-animated-css";
 import { Button } from "reactstrap";
 import CardComponent from "./CardComponent";
+import SocialMedia from "../SocialMedia";
 import "./Quote.css";
 
 // import { getQuote } from "./QuotesApi";
@@ -86,8 +87,6 @@ class Quotes extends React.Component {
     );
   }
 
-
-
   render() {
     const showAll = this.props.showAll;
     const quotes = this.props.quotes;
@@ -100,23 +99,22 @@ class Quotes extends React.Component {
     // };
     return (
       <div className={showAll ? "wrap" : "container"}>
-
-       <div className="screen">
-       {/* BackgroundComponent */}
+        <div className="screen">
+          {/* BackgroundComponent */}
           <img src={image} />
         </div>
-      
+
         <div className="d-flex justify-content-center p-3">
-          <Button onClick={this.props.onShowList} >
+          <Button onClick={this.props.onShowList}>
             {showAll ? "Show All" : "Slide"}
           </Button>
         </div>
-
         {showAll ? (
           <div style={{ display: showAll ? "block" : "none" }}>
             <div className="d-flex justify-content-between align-items-center">
               <div className="p-2">
-                <i className="arrow left"
+                <i
+                  className="arrow left"
                   onClick={this.onPreviousQuote.bind(this)}
                 />
               </div>
@@ -145,10 +143,8 @@ class Quotes extends React.Component {
           </div>
         )}
         <div className={showAll ? "bottom" : "bottomCenter"}>
-        {/* SocialComponent */}
-          <h1 style={{ color: "white" }}>
-            social component will replace this h1
-          </h1>
+          <SocialMedia 
+          quote={quotes.quote} />
         </div>
       </div>
     );
