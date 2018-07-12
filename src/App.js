@@ -146,6 +146,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.loadSocialPlugin();
     // fetch("https://api.unsplash.com/photos/random", {
     //   headers: {
     //     Authorization:
@@ -159,6 +160,7 @@ class App extends Component {
   }
 
   loadSocialPlugin() {
+    console.log("Fb init");
     /*eslint-disable no-undef*/
     window.fbAsyncInit = function() {
       FB.init({

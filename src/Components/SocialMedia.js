@@ -39,6 +39,7 @@ const SocialMedia = props => {
     const socialMediaTypeHandler = (e, type) => {
     
         if (type === 'Twitter') {
+            console.log('Twitter work');
             twitterHandler(props.quote)
         } else if (type === 'Facebook') {
             facebookHandler(props.quote)

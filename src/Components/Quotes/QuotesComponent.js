@@ -21,6 +21,7 @@ class Quotes extends React.Component {
   }
 
   componentDidMount() {
+    // this.loadSocialPlugin();
     // getQuote()
     //   .then(res => {
     //     const quotes = res.data.results;
@@ -46,6 +47,32 @@ class Quotes extends React.Component {
     }
     this.animationTime();
   }
+
+  loadSocialPlugin() {
+    /*eslint-disable no-undef*/
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: "1907512692601823",
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: "v3.0"
+      });
+    };
+
+    (function(d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+    /*eslint-disable no-undef*/
+  }
+
 
   onPreviousQuote() {
     const index = this.state.quoteIndex;
@@ -90,6 +117,7 @@ class Quotes extends React.Component {
   render() {
     const showAll = this.props.showAll;
     const quotes = this.props.quotes;
+    let quote = quotes[this.state.quoteIndex].quote;
     let image = quotes[this.state.quoteIndex].image;
     // let styleBack = {
     //   backgroundSize: "cover",
@@ -144,7 +172,7 @@ class Quotes extends React.Component {
         )}
         <div className={showAll ? "bottom" : "bottomCenter"}>
           <SocialMedia 
-          quote={quotes.quote} />
+          quote={quote} />
         </div>
       </div>
     );
