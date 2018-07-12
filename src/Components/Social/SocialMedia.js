@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import GenericShareComponent from './GenericShareComponent';
 import * as Icon from 'react-feather';
 
