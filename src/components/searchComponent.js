@@ -48,8 +48,8 @@ class Search extends Component {
     <input
      type='text'
      placeholder='Insert a keyword'
-    //  value={this.props.searchTerm}
-     ref={this.props.textInput}
+     value={this.props.searchTerm}
+    //  ref={this.props.textInput}
      onChange={this.props.searchThis}
     />
     <button

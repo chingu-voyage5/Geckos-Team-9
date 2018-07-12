@@ -27,7 +27,7 @@ class App extends Component {
 
         <Search searchTerm={this.state.searchTerm}
                 searchThis={this.searchThis}
-                textInput={this.myRef}
+                // textInput={this.myRef}
         />
 
       </div>
