@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import GenericShareComponent from './GenericShareComponent';
+import * as Icon from 'react-feather';
 
 
 const socialList = [
     {
         type: 'Twitter',
+        icon: <Icon.Twitter size={48} color="white"/>
     },
     {
-        type: 'Instagram'
+        type: 'Instagram',
+        icon: <Icon.Instagram size={48} color="white"/>
     },
     {
-        type: 'Facebook'
+        type: 'Facebook',
+        icon: <Icon.Facebook size={48} color="white"/>
     }
 ]
 
@@ -50,10 +54,10 @@ const SocialMedia = props => {
     }
 
     return (
-        <div>
+        <div style={{width:'100%'}}>
         {
             socialList.map((item, index) => {
-                return <GenericShareComponent key={index} clicked={socialMediaTypeHandler} type={item.type} />
+                return <GenericShareComponent key={index} clicked={socialMediaTypeHandler} type={item.type} icon={item.icon} />
             })
         }
         </div>

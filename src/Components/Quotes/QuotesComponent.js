@@ -2,7 +2,7 @@ import React from "react";
 import { Animated } from "react-animated-css";
 import { Button } from "reactstrap";
 import CardComponent from "./CardComponent";
-import SocialMedia from "../SocialMedia";
+import SocialMedia from "../Social/SocialMedia";
 import "./Quote.css";
 
 // import { getQuote } from "./QuotesApi";
