@@ -21,6 +21,7 @@
 
 .slide-content span {
   font-size: 1.5rem;
+  white-space: pre-line;
   color: #fff;
   text-shadow: 3px 3px 4px black;
 }
