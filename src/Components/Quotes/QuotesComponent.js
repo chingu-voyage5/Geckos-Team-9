@@ -93,11 +93,10 @@ class Quotes extends React.Component {
     }, 50);
   }
 
-  renderQuoteAnimate() {
+  renderQuote() {
     let quotes = this.props.quotes[this.state.quoteIndex];
     const style = {
-      display: this.state.animated ? "" : "none",
-      // lineHeight: '0.2rem'
+      display: this.state.animated ? "" : "none"
     };
     return (
       // <Fade in={this.state.fadeIn} tag="h5" className="mt-3">
@@ -108,11 +107,13 @@ class Quotes extends React.Component {
         animationIn="fadeIn"
         animationOut="fadeOut"
         isVisible={true}
-        style={style}
-      >
+        style={style}>
+
         <span className="quotation" >
-          {quotes.quote.split('\n    \n').join('\n')}
+          {quotes.quote.split('\n    \n').shift()}
         </span>
+        
+        <span>{`\n~ ${quotes.author}`}</span>
       </Animated>
     );
   }
@@ -150,7 +151,7 @@ class Quotes extends React.Component {
                 />
               </div>
               <div className="slide-content p-5">
-                {this.renderQuoteAnimate()} 
+                {this.renderQuote()} 
               </div>
               <div className="p-2">
                 <i
