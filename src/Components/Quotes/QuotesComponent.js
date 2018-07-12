@@ -112,7 +112,6 @@ class Quotes extends React.Component {
         <span className="quotation" >
           {quotes.quote.split('\n    \n').shift()}
         </span>
-        
         <span>{`\n~ ${quotes.author}`}</span>
       </Animated>
     );
@@ -123,12 +122,7 @@ class Quotes extends React.Component {
     const quotes = this.props.quotes;
     let quote = quotes[this.state.quoteIndex].quote;
     let image = quotes[this.state.quoteIndex].image;
-    // let styleBack = {
-    //   backgroundSize: "cover",
-    //   backgroundPosition: "center",
-    //   backgroundRepeat: "no-repeat",
-    //   backgroundImage: `url(${image})`
-    // };
+   
     return (
       <div className={showAll ? "wrap" : "container"}>
         <div className="screen">
