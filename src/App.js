@@ -37,7 +37,7 @@ class App extends Component {
     getQuotesRandom()
       .then(res => {
         const quotes = res.data.results;
-        this.setState({quotes:quotes});
+        this.setState({quotes});
       })
       .catch(err => console.log(err));
   }
@@ -105,7 +105,7 @@ class App extends Component {
       getQuotes(tag)
         .then(res => {
           const quotes = res.data.results;
-          this.setState({quotes:quotes});
+          this.setState({quotes});
         })
         .catch(err => console.log(err));
     } else {
