@@ -1,50 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Form, Button, FormGroup, Input } from "reactstrap";
 
 class Search extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
-}
-
-
-//Not sure if the click event will be here.
-
-  handleClick (e){
-    e.preventDefault();
-    this.props.searchTerm !== ''
-    ?
-    alert('Searching for' +  ' ' + this.props.searchTerm)
-    :
-    null
+    // this.handleClick = this.handleClick.bind(this);
   }
 
-  render(
+  submit(e) {
+    e.preventDefault();
+  }
 
-  ) {
+  render() {
+    return (
+      <Form inline onSubmit={this.submit}>
+        <FormGroup>
+          <Input
+            className="mr-sm-2"
+            type="text"
+            placeholder="Write a word"
+            value={this.props.searchTerm}
+            onChange={this.props.onSearchThis}
+          />
 
-  return(
-    <div>
-
-    <input
-     type='text'
-     placeholder='Insert a keyword'
-     value={this.props.searchTerm}
-     onChange={this.props.searchThis}
-    />
-    <button
-      type='button'
-      onClick={this.handleClick}>
-      Search
-    </button>
-
-
-    <br/>
-
-
-    </div>
-  )}
+          <Button
+            className="btn btn-outline-primary "
+            type="button"
+            onClick={this.props.onSearch}>
+            Search
+          </Button>
+        </FormGroup>
+      </Form>
+    );
+  }
 }
-
 
 export default Search;

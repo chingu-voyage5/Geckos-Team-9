@@ -8,12 +8,14 @@ let configKey = {
   }
 };
 
-export const getQuote = () => {
+export const getQuotes = (tag) => {
   // axios.get(`${uri}?limit=10`,configKey).then(res => {
   //     return res.data;
   // })
 //   return axios.get("https://jsonplaceholder.typicode.com/users"); 
-return axios.get(`${uri}?limit=10`,configKey);
+return axios.get(`${uri}?limit=20&tags=${tag}`,configKey);
 };
 
-export function getQuotes() {}
+export function getQuotesRandom() {
+  return axios.get(`${uri}?limit=5`,configKey);
+}

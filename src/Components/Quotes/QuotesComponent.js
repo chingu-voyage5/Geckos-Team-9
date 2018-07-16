@@ -14,6 +14,7 @@ class Quotes extends React.Component {
       quoteIndex: 0,
       animated: false
     };
+
     this.animationTime();
 
     // this.onNextQuote = this.nextQuote.bind(this);
@@ -73,7 +74,6 @@ class Quotes extends React.Component {
     /*eslint-disable no-undef*/
   }
 
-
   onPreviousQuote() {
     const index = this.state.quoteIndex;
     const quoteSize = this.props.quotes.length - 1;
@@ -120,14 +120,14 @@ class Quotes extends React.Component {
   render() {
     const showAll = this.props.showAll;
     const quotes = this.props.quotes;
-    let quote = quotes[this.state.quoteIndex].quote;
-    let image = quotes[this.state.quoteIndex].image;
+    let quote = quotes[this.state.quoteIndex];
+    let image = quotes[this.state.quoteIndex];
    
     return (
       <div className={showAll ? "wrap" : "container"}>
         <div className="screen">
           {/* BackgroundComponent */}
-          <img src={image} />
+          <img src={image.image} />
         </div>
 
         <div className="d-flex justify-content-center p-3">
@@ -170,7 +170,7 @@ class Quotes extends React.Component {
         )}
         <div className={showAll ? "bottom" : "bottomCenter"}>
           <SocialMedia 
-          quote={quote} />
+          quote={quote.quote} />
         </div>
       </div>
     );
