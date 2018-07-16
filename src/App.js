@@ -2,25 +2,24 @@ import React, { Component } from "react";
 import Quotes from "./Components/Quotes/QuotesComponent";
 import Search from "./Components/searchComponent";
 import { getQuotes, getQuotesRandom } from "./Components/Quotes/QuotesApi";
+import {
+  getPhotos,
+  getPhotosRandom
+} from "./Components/Background/BackgroundApi";
 
 import "./App.css";
 import "../node_modules/animate.css/animate.css";
 
 class App extends Component {
- 
-
   constructor() {
     super();
-
-  
     this.myRef = React.createRef();
     this.state = {
       searchTerm: "",
       backgroundURL: "",
       quotes: [
         {
-          quote:
-            "",
+          quote: "",
           author: "",
           likes: 0,
           tags: [],
@@ -33,13 +32,7 @@ class App extends Component {
     this.onSearchThis = this.onSearchThis.bind(this);
     this.onSearch = this.onSearch.bind(this);
     this.onShowList = this.onShowList.bind(this);
-
-    getQuotesRandom()
-      .then(res => {
-        const quotes = res.data.results;
-        this.setState({quotes});
-      })
-      .catch(err => console.log(err));
+    this.joinQuotesWithBackground();
   }
 
   componentDidMount() {
@@ -83,6 +76,25 @@ class App extends Component {
     /*eslint-disable no-undef*/
   }
 
+  async joinQuotesWithBackground() {
+    // let quotes = await getQuotesRandom()
+    //   .then(res => res.data.results)
+    //   .catch(err => console.log(err));
+
+    let background = await getPhotosRandom()
+      .then(res => res.data)
+      .catch(err => console.log(err));
+
+    // console.log("Quotes " + quotes.length);
+    console.log("Background " + background.length);
+    // getPhotosRandom()
+    //   .then(res => background = res.data)
+    //   .catch(err => console.log(err));
+
+    // const QuoteBack = quotes.map(item =>
+    //              background.map( img => item.image = img.urls.regular));
+  }
+
   onShowList() {
     console.log("Clicked!!!");
     this.setState({
@@ -105,7 +117,7 @@ class App extends Component {
       getQuotes(tag)
         .then(res => {
           const quotes = res.data.results;
-          this.setState({quotes});
+          this.setState({ quotes });
         })
         .catch(err => console.log(err));
     } else {
@@ -122,7 +134,7 @@ class App extends Component {
     const showAll = this.state.showAll;
     return (
       <div className={showAll ? "wrap" : ""}>
-        <div className="top d-flex flex-row justify-content-center">
+        {/* <div className="top d-flex flex-row justify-content-center">
           <Search
             searchTerm={this.state.searchTerm}
             onSearch={this.onSearch}
@@ -135,7 +147,7 @@ class App extends Component {
           background={backgroundURL}
           showAll={showAll}
           onShowList={this.onShowList}
-        />
+        /> */}
       </div>
     );
   }

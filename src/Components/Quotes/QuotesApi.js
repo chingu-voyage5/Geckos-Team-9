@@ -8,7 +8,7 @@ let configKey = {
   }
 };
 
-export const getQuotes = (tag) => {
+export function getQuotes(tag){
   // axios.get(`${uri}?limit=10`,configKey).then(res => {
   //     return res.data;
   // })
@@ -16,6 +16,6 @@ export const getQuotes = (tag) => {
 return axios.get(`${uri}?limit=20&tags=${tag}`,configKey);
 };
 
-export function getQuotesRandom() {
-  return axios.get(`${uri}?limit=5`,configKey);
+export  function getQuotesRandom() {
+  return  axios.get(`${uri}?limit=5`,configKey);
 }
