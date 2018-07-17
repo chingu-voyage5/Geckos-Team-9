@@ -38,8 +38,13 @@ class App extends Component {
 
   componentDidMount() {
     this.loadSocialPlugin();
+    this.getApiJoinData().then(res => 
+      this.setState({
+        quotes: res
+      })
+    );
    
-    this.setState({ quotes:this.joinTest() });
+  
     // fetch("https://api.unsplash.com/photos/random", {
     //   headers: {
     //     Authorization:
@@ -96,6 +101,24 @@ class App extends Component {
     })
 
     return quotes;
+  }
+
+  async searchQuoteByKey(tag){
+    let quotes = await getQuotes(tag)
+    .then(res => res.data.results)
+    .catch(err =>  console.error("Error getQuotes: " + err ));
+  let background = await getPhotos(tag)
+    .then(res => res.data)
+    .catch(err => console.error("Error getPhotos: " + err));
+  console.log("Quotes " + quotes.length);
+  console.log("Background " + background.length);
+
+  quotes.map((q,i) => {
+    q.image = background[i].urls.regular;
+    q.small = background[i].urls.small;
+  })
+
+  return quotes;
   }
 
  
@@ -586,10 +609,9 @@ class App extends Component {
     let tag = this.state.searchTerm;
     if (tag !== "") {
       console.log("Button clicked: " + tag);
-      getQuotes(tag)
+      this.searchQuoteByKey(tag)
         .then(res => {
-          const quotes = res.data.results;
-          this.setState({ quotes });
+          this.setState({ quotes:res });
         })
         .catch(err => console.log(err));
     } else {
