@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const uri = "http://api.paperquotes.com/apiv1/quotes/";
+const uri = "https://api.paperquotes.com/apiv1/quotes/";
 const api_key = "e2eeb1aa9f32eb07fa04595a0c457ecb6fadb772";
 let configKey = {
   method: "GET",
