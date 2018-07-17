@@ -39,7 +39,7 @@ class App extends Component {
   componentDidMount() {
     this.loadSocialPlugin();
    
-    this.setState({ quotes: this.joinTest() });
+    this.setState({ quotes:this.joinQuotesWithBackground() });
     // fetch("https://api.unsplash.com/photos/random", {
     //   headers: {
     //     Authorization:
@@ -79,16 +79,23 @@ class App extends Component {
   }
 
   async joinQuotesWithBackground() {
-    // let quotes = await getQuotesRandom()
-    //   .then(res => res.data.results)
-    //   .catch(err =>  console.error("Error getQuotesRandom: " + err ));
-    // let background = await getPhotosRandom()
-    //   .then(res => res.data)
-    //   .catch(err => console.error("Error getPhotosRandom: " + err));
-    // console.log("Quotes " + quotes.length);
-    // console.log("Background " + background.length);
+    let quotes = await getQuotesRandom()
+      .then(res => res.data.results)
+      .catch(err =>  console.error("Error getQuotesRandom: " + err ));
+    let background = await getPhotosRandom()
+      .then(res => res.data)
+      .catch(err => console.error("Error getPhotosRandom: " + err));
+    console.log("Quotes " + quotes.length);
+    console.log("Background " + background.length);
     // const QuoteBack = quotes.map(item =>
     //              background.map( img => item.image = img.urls.regular));
+
+    quotes.map((q,i) => {
+      q.image = background[i].urls.regular;
+      q.small = background[i].urls.small;
+    })
+
+    return quotes;
   }
 
   joinTest() {
