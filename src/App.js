@@ -39,7 +39,7 @@ class App extends Component {
   componentDidMount() {
     this.loadSocialPlugin();
    
-    this.setState({ quotes:this.joinQuotesWithBackground() });
+    this.setState({ quotes:this.joinTest() });
     // fetch("https://api.unsplash.com/photos/random", {
     //   headers: {
     //     Authorization:
@@ -78,7 +78,7 @@ class App extends Component {
     /*eslint-disable no-undef*/
   }
 
-  async joinQuotesWithBackground() {
+  async getApiJoinData() {
     let quotes = await getQuotesRandom()
       .then(res => res.data.results)
       .catch(err =>  console.error("Error getQuotesRandom: " + err ));
@@ -98,6 +98,7 @@ class App extends Component {
     return quotes;
   }
 
+ 
   joinTest() {
     const quoteTest = [
       {
