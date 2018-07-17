@@ -77,10 +77,15 @@ class Quotes extends React.Component {
   onPreviousQuote() {
     const index = this.state.quoteIndex;
     const quoteSize = this.props.quotes.length - 1;
-    if (index < quoteSize && index > 0) {
-      console.log(this.state.quoteIndex);
+    console.log("PreviousQuote");
+    if (index > 0 && index <= quoteSize) {
       this.setState({
         quoteIndex: this.state.quoteIndex - 1,
+        animated: false
+      });
+    } else {
+      this.setState({
+        quoteIndex: quoteSize ,
         animated: false
       });
     }
@@ -107,10 +112,10 @@ class Quotes extends React.Component {
         animationIn="fadeIn"
         animationOut="fadeOut"
         isVisible={true}
-        style={style}>
-
-        <span className="quotation" >
-          {quotes.quote.split('\n    \n').shift()}
+        style={style}
+      >
+        <span className="quotation">
+          {quotes.quote.split("\n    \n").shift()}
         </span>
         <span>{`\n~ ${quotes.author}`}</span>
       </Animated>
@@ -122,7 +127,7 @@ class Quotes extends React.Component {
     const quotes = this.props.quotes;
     let quote = quotes[this.state.quoteIndex];
     let image = quotes[this.state.quoteIndex];
-   
+
     return (
       <div className={showAll ? "wrap" : "container"}>
         <div className="screen">
@@ -144,9 +149,7 @@ class Quotes extends React.Component {
                   onClick={this.onPreviousQuote.bind(this)}
                 />
               </div>
-              <div className="slide-content p-5">
-                {this.renderQuote()} 
-              </div>
+              <div className="slide-content p-5">{this.renderQuote()}</div>
               <div className="p-2">
                 <i
                   className="arrow right"
@@ -169,8 +172,7 @@ class Quotes extends React.Component {
           </div>
         )}
         <div className={showAll ? "bottom" : "bottomCenter"}>
-          <SocialMedia 
-          quote={quote.quote} />
+          <SocialMedia quote={quote.quote} />
         </div>
       </div>
     );
