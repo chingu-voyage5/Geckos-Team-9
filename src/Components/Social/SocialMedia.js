@@ -1,67 +1,73 @@
-import React from "react";
+import React from 'react';
 import GenericShareComponent from './GenericShareComponent';
 import * as Icon from 'react-feather';
 
+function formatQuote(q) {
+  const arrQuote = q.split('\\n    \\n');
+  const quote = `"${arrQuote[0]}" - ${arrQuote[1].trim().replace(',', '')}`;
+  return quote;
+}
 
 const socialList = [
+  {
+    type: 'Twitter',
+    icon: <Icon.Twitter size={48} color="white" />
+  },
+  {
+    type: 'Instagram',
+    icon: <Icon.Instagram size={48} color="white" />
+  }
+];
+
+const twitterHandler = async quote => {
+  const quoteAuthor = formatQuote(quote);
+  window.open(`https://twitter.com/intent/tweet?text=${quoteAuthor}`, '_blank');
+};
+
+const facebookHandler = (quote, img) => {
+  const quoteAuthor = formatQuote(quote);
+  /*eslint-disable no-undef*/
+  FB.ui(
     {
-        type: 'Twitter',
-        icon: <Icon.Twitter size={48} color="white"/>
+      method: 'share',
+      href: img,
+      quote: quoteAuthor
     },
-    {
-        type: 'Instagram',
-        icon: <Icon.Instagram size={48} color="white"/>
-    },
-    {
-        type: 'Facebook',
-        icon: <Icon.Facebook size={48} color="white"/>
+    function(response) {
+      console.log(response);
     }
-]
-
-const twitterHandler = async (quote) => {
-    window.open(`https://twitter.com/intent/tweet?text=${quote}`, '_blank')
-}
-
-const facebookHandler = (quote) => {
-    console.log({quote})
-    /*eslint-disable no-undef*/
-    FB.ui({
-        method: 'share',
-        href: 'https://google.com/',
-        quote: quote,
-      }, function(response){
-          console.log(response);
-      });
-    /*eslint-disable no-undef*/
-}
+  );
+  /*eslint-disable no-undef*/
+};
 
 const instagramHandler = () => {
-    console.log('Instragram handler initialised')
-}
+  console.log('Instragram handler initialised');
+};
 
-const SocialMedia = props => { 
-    const socialMediaTypeHandler = (e, type) => {
-    
-        if (type === 'Twitter') {
-            console.log('Twitter work');
-            twitterHandler(props.quote)
-        } else if (type === 'Facebook') {
-            facebookHandler(props.quote)
-        } else if (type === 'Instagram') {
-            instagramHandler(props.quote)
-        }
-
+const SocialMedia = props => {
+  const socialMediaTypeHandler = (e, type) => {
+    if (type === 'Twitter') {
+      console.log('Twitter work');
+      twitterHandler(props.quote);
+    } else if (type === 'Facebook') {
+      facebookHandler(props.quote, props.quoteImg);
     }
+  };
 
-    return (
-        <div style={{width:'100%'}}>
-        {
-            socialList.map((item, index) => {
-                return <GenericShareComponent key={index} clicked={socialMediaTypeHandler} type={item.type} icon={item.icon} />
-            })
-        }
-        </div>
-    )
-}
+  return (
+    <div style={{ width: '100%' }}>
+      {socialList.map((item, index) => {
+        return (
+          <GenericShareComponent
+            key={index}
+            clicked={socialMediaTypeHandler}
+            type={item.type}
+            icon={item.icon}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 export default SocialMedia;
