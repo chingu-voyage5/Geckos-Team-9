@@ -1,9 +1,9 @@
-import React from "react";
-import { Animated } from "react-animated-css";
-import { Button } from "reactstrap";
-import CardComponent from "./CardComponent";
-import SocialMedia from "../Social/SocialMedia";
-import "./Quote.css";
+import React from 'react';
+import { Animated } from 'react-animated-css';
+import { Button } from 'reactstrap';
+import CardComponent from './CardComponent';
+import SocialMedia from '../Social/SocialMedia';
+import './Quote.css';
 
 // import { getQuote } from "./QuotesApi";
 
@@ -34,7 +34,7 @@ class Quotes extends React.Component {
   onNextQuote() {
     const index = this.state.quoteIndex;
     const quoteSize = this.props.quotes.length - 1;
-    console.log("nextQuote");
+    console.log('nextQuote');
     if (index < quoteSize) {
       this.setState({
         quoteIndex: index + 1,
@@ -53,10 +53,10 @@ class Quotes extends React.Component {
     /*eslint-disable no-undef*/
     window.fbAsyncInit = function() {
       FB.init({
-        appId: "1907512692601823",
+        appId: '1907512692601823',
         autoLogAppEvents: true,
         xfbml: true,
-        version: "v3.0"
+        version: 'v3.0'
       });
     };
 
@@ -68,16 +68,16 @@ class Quotes extends React.Component {
       }
       js = d.createElement(s);
       js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
+    })(document, 'script', 'facebook-jssdk');
     /*eslint-disable no-undef*/
   }
 
   onPreviousQuote() {
     const index = this.state.quoteIndex;
     const quoteSize = this.props.quotes.length - 1;
-    console.log("PreviousQuote");
+    console.log('PreviousQuote');
     if (index > 0 && index <= quoteSize) {
       this.setState({
         quoteIndex: this.state.quoteIndex - 1,
@@ -85,7 +85,7 @@ class Quotes extends React.Component {
       });
     } else {
       this.setState({
-        quoteIndex: quoteSize ,
+        quoteIndex: quoteSize,
         animated: false
       });
     }
@@ -101,7 +101,7 @@ class Quotes extends React.Component {
   renderQuote() {
     let quotes = this.props.quotes[this.state.quoteIndex];
     const style = {
-      display: this.state.animated ? "" : "none"
+      display: this.state.animated ? '' : 'none'
     };
     return (
       // <Fade in={this.state.fadeIn} tag="h5" className="mt-3">
@@ -115,7 +115,7 @@ class Quotes extends React.Component {
         style={style}
       >
         <span className="quotation">
-          {quotes.quote.split("\n    \n").shift()}
+          {quotes.quote.split('\n    \n').shift()}
         </span>
         <span>{`\n~ ${quotes.author}`}</span>
       </Animated>
@@ -129,7 +129,7 @@ class Quotes extends React.Component {
     let image = quotes[this.state.quoteIndex];
 
     return (
-      <div className={showAll ? "wrap" : "container"}>
+      <div className={showAll ? 'wrap' : 'container'}>
         <div className="screen">
           {/* BackgroundComponent */}
           <img src={image.image} />
@@ -137,11 +137,11 @@ class Quotes extends React.Component {
 
         <div className="d-flex justify-content-center p-3">
           <Button onClick={this.props.onShowList}>
-            {showAll ? "Show All" : "Slide"}
+            {showAll ? 'Show All' : 'Slide'}
           </Button>
         </div>
         {showAll ? (
-          <div style={{ display: showAll ? "block" : "none" }}>
+          <div style={{ display: showAll ? 'block' : 'none' }}>
             <div className="d-flex justify-content-between align-items-center">
               <div className="p-2">
                 <i
@@ -159,7 +159,7 @@ class Quotes extends React.Component {
             </div>
           </div>
         ) : (
-          <div style={{ display: showAll ? "none" : "block" }}>
+          <div style={{ display: showAll ? 'none' : 'block' }}>
             <Animated
               animationIn="fadeIn"
               animationOut="fadeOut"
@@ -171,8 +171,8 @@ class Quotes extends React.Component {
             </Animated>
           </div>
         )}
-        <div className={showAll ? "bottom" : "bottomCenter"}>
-          <SocialMedia quote={quote.quote} />
+        <div className={showAll ? 'bottom' : 'bottomCenter'}>
+          <SocialMedia quote={quote.quote} quoteImg={image.image} />
         </div>
       </div>
     );
