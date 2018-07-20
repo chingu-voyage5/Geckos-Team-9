@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Quotes from "./Components/Quotes/QuotesComponent";
-import Search from "./Components/searchComponent";
+import Search from "./Components/Search/searchComponent";
 import { getQuotes, getQuotesRandom } from "./Components/Quotes/QuotesApi";
 import {
   getPhotos,
   getPhotosRandom
 } from "./Components/Background/BackgroundApi";
-
+import * as Icon from "react-feather";
 import "./App.css";
 import "../node_modules/animate.css/animate.css";
 
@@ -15,6 +15,7 @@ class App extends Component {
     super();
     this.myRef = React.createRef();
     this.state = {
+      loading: false,
       searchTerm: "",
       backgroundURL: "",
       quotes: [
@@ -32,29 +33,17 @@ class App extends Component {
     this.onSearchThis = this.onSearchThis.bind(this);
     this.onSearch = this.onSearch.bind(this);
     this.onShowList = this.onShowList.bind(this);
-   
+
     // this.joinQuotesWithBackground();
   }
 
   componentDidMount() {
     this.loadSocialPlugin();
-    this.getApiJoinData().then(res => 
+    this.getApiJoinData().then(res =>
       this.setState({
         quotes: res
       })
     );
-   
-  
-    // fetch("https://api.unsplash.com/photos/random", {
-    //   headers: {
-    //     Authorization:
-    //       "Client-ID d870e34414bd653b93aba9430261a7535a80cedede08dca342de5b0424cb6f46"
-    //   }
-    // })
-    //   .then(result => result.json())
-    //   .then(json => {
-    //     this.setState({ backgroundURL: json.urls.regular });
-    //   });
   }
 
   loadSocialPlugin() {
@@ -86,7 +75,7 @@ class App extends Component {
   async getApiJoinData() {
     let quotes = await getQuotesRandom()
       .then(res => res.data.results)
-      .catch(err =>  console.error("Error getQuotesRandom: " + err ));
+      .catch(err => console.error("Error getQuotesRandom: " + err));
     let background = await getPhotosRandom()
       .then(res => res.data)
       .catch(err => console.error("Error getPhotosRandom: " + err));
@@ -95,34 +84,33 @@ class App extends Component {
     // const QuoteBack = quotes.map(item =>
     //              background.map( img => item.image = img.urls.regular));
 
-    quotes.map((q,i) => {
+    quotes.map((q, i) => {
       q.image = background[i].urls.regular;
       q.small = background[i].urls.small;
-    })
+    });
 
     return quotes;
   }
 
-  async searchQuoteByKey(tag){
+  async searchQuoteByKey(tag) {
     let quotes = await getQuotes(tag)
-    .then(res => res.data.results)
-    .catch(err =>  console.error("Error getQuotes: " + err ));
-  let background = await getPhotos(tag)
-    .then(res => res.data)
-    .catch(err => console.error("Error getPhotos: " + err));
-  console.log("Quotes " + quotes.length);
-  console.log("Background " + background.length);
+      .then(res => res.data.results)
+      .catch(err => console.error("Error getQuotes: " + err));
+    let background = await getPhotos(tag)
+      .then(res => res.data)
+      .catch(err => console.error("Error getPhotos: " + err));
+    console.log("Quotes " + quotes.length);
+    console.log("Background " + background.length);
 
-  quotes.map((q,i) => {
-    q.image = background[i].urls.regular;
-    q.small = background[i].urls.small;
-  })
+    quotes.map((q, i) => {
+      q.image = background[i].urls.regular;
+      q.small = background[i].urls.small;
+    });
 
-  return quotes;
+    return quotes;
   }
 
- 
-  joinTest() {
+  getQuotesOffline() {
     const quoteTest = [
       {
         quote:
@@ -582,11 +570,11 @@ class App extends Component {
         downloads: 8491
       }
     ];
-   
-    quoteTest.map((q,i) => {
+
+    quoteTest.map((q, i) => {
       q.image = backgroundTest[i].urls.regular;
       q.small = backgroundTest[i].urls.small;
-    })
+    });
     return quoteTest;
   }
 
@@ -611,7 +599,7 @@ class App extends Component {
       console.log("Button clicked: " + tag);
       this.searchQuoteByKey(tag)
         .then(res => {
-          this.setState({ quotes:res });
+          this.setState({ quotes: res });
         })
         .catch(err => console.log(err));
     } else {
@@ -620,30 +608,39 @@ class App extends Component {
   }
 
   render() {
-    // document.querySelector("body").background = this.state.backgroundURL;
-    // https://source.unsplash.com/category/nature/1920x1080
-    const backgroundURL =
-      "https://source.unsplash.com/category/nature/1920x1080";
     let quotes = this.state.quotes;
     const showAll = this.state.showAll;
-    return (
-      <div className={showAll ? "wrap" : ""}>
-        <div className="top d-flex flex-row justify-content-center">
-          <Search
-            searchTerm={this.state.searchTerm}
-            onSearch={this.onSearch}
-            onSearchThis={this.onSearchThis}
+    const loading = this.state.loading;
+
+    if (loading) {
+      return (
+        <div className={showAll ? "wrap" : ""}>
+          <div className="top d-flex flex-row justify-content-center">
+            <Search
+              searchTerm={this.state.searchTerm}
+              onSearch={this.onSearch}
+              onSearchThis={this.onSearchThis}
+            />
+          </div>
+
+          <Quotes
+            quotes={quotes}
+            showAll={showAll}
+            onShowList={this.onShowList}
           />
         </div>
-
-        <Quotes
-          quotes={quotes}
-          background={backgroundURL}
-          showAll={showAll}
-          onShowList={this.onShowList}
-        />
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="d-flex justify-content-center align-items-center" style={{height:window.innerHeight}}> 
+          
+          <div>
+            <Icon.Loader size={72} color="black" />
+          </div>
+          
+        </div>
+      );
+    }
   }
 }
 
