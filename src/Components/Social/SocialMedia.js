@@ -3,12 +3,16 @@ import GenericShareComponent from './GenericShareComponent';
 import * as Icon from 'react-feather';
 
 function formatQuote(q) {
-  const arrQuote = q.split('\\n    \\n');
+  const arrQuote = q.split('\n    \n');
   const quote = `"${arrQuote[0]}" - ${arrQuote[1].trim().replace(',', '')}`;
   return quote;
 }
 
 const socialList = [
+  // {
+  //   type: 'Facebook',
+  //   icon: <Icon.Facebook size={48} color="white" />
+  // },
   {
     type: 'Twitter',
     icon: <Icon.Twitter size={48} color="white" />
@@ -20,7 +24,7 @@ const socialList = [
 ];
 
 const twitterHandler = async quote => {
-  const quoteAuthor = formatQuote(quote);
+  const quoteAuthor = await formatQuote(quote);
   window.open(`https://twitter.com/intent/tweet?text=${quoteAuthor}`, '_blank');
 };
 
