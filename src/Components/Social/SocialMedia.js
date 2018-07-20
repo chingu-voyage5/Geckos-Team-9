@@ -9,10 +9,10 @@ function formatQuote(q) {
 }
 
 const socialList = [
-  // {
-  //   type: 'Facebook',
-  //   icon: <Icon.Facebook size={48} color="white" />
-  // },
+  {
+    type: 'Facebook',
+    icon: <Icon.Facebook size={48} color="white" />
+  },
   {
     type: 'Twitter',
     icon: <Icon.Twitter size={48} color="white" />
